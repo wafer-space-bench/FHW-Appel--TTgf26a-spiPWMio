@@ -16,6 +16,11 @@ async def initialize_dut(dut):
     cocotb.start_soon(clock.start())
     dut.ena.value = 1
     dut.rst_n.value = 0
+    # Initialize SPI signals to avoid X values
+    cocotb.start_soon(Clock(dut.spi_sck, 2, units="us").start())
+    dut.spi_cs_n.value = 1
+    dut.spi_mosi.value = 0
+    dut.ipins.value = 0
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
     await ClockCycles(dut.clk, 1)
@@ -31,6 +36,35 @@ async def reset_test(dut):
     """Reset test for the spiPWMio project"""
     await initialize_dut(dut)
     dut._log.info("Reset test was successful")
+
+@cocotb.test()
+async def set_io_hard(dut):
+    """Set I/O pins for the spiPWMio project"""
+    await initialize_dut(dut)
+    tt = DemoBoard.get()
+    tt.clock_project_PWM(12e6)
+    tt.reset_project(True)
+    await Timer(10, units="us")
+    tt.reset_project(False)
+    await Timer(10, units="us")
+
+    input("Conncet Pin i7 with Pin o7 and than press Enter to continue...")
+    dut.ipins.value = 0b1111111
+    dut._log.info(f"Set I/O pins to {dut.ipins.value}")
+    if input("Does the display show an o? (y/n)") == "y":
+        dut._log.info(f" Value of ipins: {dut.ipins.value} are correctly displayed")
+    else:
+        dut._log.error("Set I/O pins test failed")
+        raise Exception("Set I/O pins test failed")
+
+    dut.ipins.value = 0b0000000
+    dut._log.info(f"Set I/O pins to {dut.ipins.value}")
+    if input("Does the display show an -? (y/n)") == "y":
+        dut._log.info(f" Value of ipins: {dut.ipins.value} are correctly displayed")
+    else:
+        dut._log.error("Set I/O pins test failed")
+        raise Exception("Set I/O pins test failed")
+    dut._log.info("Set I/O pins test was successful")
 
 
 def main():

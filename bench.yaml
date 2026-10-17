@@ -1,0 +1,38 @@
+source:
+  url: https://github.com/FHW-Appel/TTgf26a-spiPWMio
+  original_url: null
+  kind: fork
+  why: GitHub fork of the upstream repository
+  licence: null
+  upstream_default_branch: main
+tapeouts:
+- org: tinytapeout
+  run: ttgf26a
+  slot: tt_um_fhw_appel_spiPWMio
+  project: spiPWMio
+  size: 1x1
+  kind: digital (Verilog)
+  commit: 95efea1bb2388985acce255b9abc4ded78fafbe9
+  commit_source: commit from the shuttle repo's projects/<name>/commit_id.json
+  tag: tinytapeout/ttgf26a/tt_um_fhw_appel_spiPWMio
+  branch: tapeout/tinytapeout/ttgf26a/tt_um_fhw_appel_spiPWMio
+  page: https://app.tinytapeout.com/shuttles/ttgf26a
+- org: tinytapeout
+  run: ttgf26b
+  slot: tt_um_fhw_appel_spiPWMio
+  project: spiPWMio
+  size: 1x1
+  kind: digital (Verilog)
+  commit: 95efea1bb2388985acce255b9abc4ded78fafbe9
+  commit_source: commit from the shuttle repo's projects/<name>/commit_id.json
+  tag: tinytapeout/ttgf26b/tt_um_fhw_appel_spiPWMio
+  branch: tapeout/tinytapeout/ttgf26b/tt_um_fhw_appel_spiPWMio
+  page: https://app.tinytapeout.com/shuttles/ttgf26b
+generated: '2026-10-17T23:38:18Z'
+tooling: https://github.com/wafer-space/wafer.space-bench
+index: https://wafer-space-bench.github.io
+branches:
+- about
+- tapeout/tinytapeout/ttgf26a/tt_um_fhw_appel_spiPWMio
+- tapeout/tinytapeout/ttgf26b/tt_um_fhw_appel_spiPWMio
+- upstream/main
